@@ -1,8 +1,8 @@
 # Halo semua! 
 
 Perkenalkan nama saya **Rian Wahyu Abdillah**.<br>
-
-Saya seorang **Fullstack Web Developer**<br>
+Saya seorang **Fullstack Web Developer**, namu saya lebih menyukai Back-End ;}<br>
+Lihat beberapa proyek saya disini [https://linktr.ee/rianabd01](https://linktr.ee/rianabd01)
 
 Jika tertarik anda untuk terhubung, silakan kunjungi akun [Linkedin](https://www.linkedin.com/in/rianwahyuab/) saya.
 <p align="left">
