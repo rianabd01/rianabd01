@@ -1,13 +1,13 @@
-# Halo semua! 
+# Hi everyone! 
 
-Perkenalkan nama saya **Rian Wahyu Abdillah**.<br>
-Saya seorang **Fullstack Web Developer**, namu saya lebih menyukai Back-End ;}<br>
-Lihat beberapa proyek saya disini [https://linktr.ee/rianabd01](https://linktr.ee/rianabd01)
+My name is **Rian Wahyu Abdillah**.<br>
+I'm a **Fullstack Web Developer**, but I prefer in Back-End ;}<br>
+See some of my projects on [https://linktr.ee/rianabd01](https://linktr.ee/rianabd01)
 
-Jika tertarik anda untuk terhubung, silakan kunjungi akun [Linkedin](https://www.linkedin.com/in/rianwahyuab/) saya.
+If you interest to connect to me, please visit my [Linkedin] account (https://www.linkedin.com/in/rianwahyuab/).
 <p align="left">
 <a href="https://github.com/rianabd01">
-  <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api?username=rianabd01&show_icons=true&theme=algolia&include_all_commits=true&count_private=true"/>
-  <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=rianabd01&layout=compact&theme=algolia"/>
+  <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api?username=rianabd01&show_icons=true&theme=dark&include_all_commits=true&count_private=true"/>
+  <img height="180em" src="https://github-readme-stats-eight-theta.vercel.app/api/top-langs/?username=rianabd01&layout=compact&theme=dark"/>
 </a>
 </p>
