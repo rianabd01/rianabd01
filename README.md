@@ -1,7 +1,7 @@
 # Hello
 
 My name is **Rian**.<br>
-I'm a **Fullstack Developer**, but I prefer in Back-End ;}<br>
+I'm a **Full Stack Developer**, prefered in Back-End ;}<br>
 See some of my projects on [linktr.ee/rianabd01](https://linktr.ee/rianabd01)
 
 If you're interested to connect with me, please visit my [Linkedin](https://www.linkedin.com/in/rianwahyuab/) or [Instagram](https://instagram.com/rianabdillah._) account.
