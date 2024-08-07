@@ -2,7 +2,7 @@
 
 My name is **Rian**.<br>
 I'm a **Full Stack Developer** ;}<br>
-See some of my projects on [linktr.ee/rianabd01](https://linktr.ee/rianabd01)
+See my page on [linktr.ee/rianabd01](https://linktr.ee/rianabd01)
 
 If you're interested to connect with me, please visit my [Linkedin](https://www.linkedin.com/in/rianwahyuab/) or [Instagram](https://instagram.com/rianabdillah._) account.
 <p align="left">
