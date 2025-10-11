@@ -38,6 +38,8 @@
 </template>
 
 <script setup lang="ts">
+import { useCachedAsyncData } from '~/composables/useCachedAsyncData'
+
 definePageMeta({
   title: 'Projects'
 })
@@ -50,7 +52,7 @@ useHead({
 })
 
 // Define the type for the API response
-interface GitHubApiResponse {
+export interface GitHubApiResponse {
   success: boolean
   projects?: Project[]
   error?: string

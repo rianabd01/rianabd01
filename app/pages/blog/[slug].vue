@@ -33,6 +33,8 @@
 </template>
 
 <script setup lang="ts">
+import { useCachedAsyncData } from '~/composables/useCachedAsyncData'
+
 definePageMeta({
   title: 'Blog Post'
 })

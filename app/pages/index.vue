@@ -186,6 +186,10 @@
 </template>
 
 <script setup lang="ts">
+import { useCachedAsyncData } from '~/composables/useCachedAsyncData';
+import type { GitHubApiResponse } from './projects.vue';
+import type { BlogPostsApiResponse } from './blogs.vue';
+
 definePageMeta({
   title: "Home",
 });
@@ -198,14 +202,14 @@ useHead({
 });
 
 // Fetch blog posts using static data fetching
-const { data: postsData, pending: postsPending, error: postsError } = await useCachedAsyncData(
-  'homepage-posts',
+const { data: postsData, pending: postsPending, error: postsError } = await useCachedAsyncData<BlogPostsApiResponse>(
+  'blogs',
   () => $fetch('/api/blog-posts')
 );
 
 // Fetch projects using static data fetching
-const { data: projectsData, pending: projectsPending, error: projectsError } = await useCachedAsyncData(
-  'homepage-projects',
+const { data: projectsData, pending: projectsPending, error: projectsError } = await useCachedAsyncData<GitHubApiResponse>(
+  'projects',
   () => $fetch('/api/github-projects')
 );
 
@@ -215,7 +219,7 @@ const latestPosts = computed(() => {
   return posts.slice(0, 4).map((post) => {
     let id = "";
     if (post.link) {
-      const urlWithoutParams = post.link.split("?")[0];
+      const urlWithoutParams = post.link.split("?")[0] || "";
       const urlParts = urlWithoutParams.split("-");
       id = urlParts[urlParts.length - 1] || "";
     }

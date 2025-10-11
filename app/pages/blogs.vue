@@ -35,6 +35,8 @@
 </template>
 
 <script setup lang="ts">
+import { useCachedAsyncData } from '~/composables/useCachedAsyncData'
+
 definePageMeta({
   title: 'Blogs'
 })
@@ -47,7 +49,7 @@ useHead({
 })
 
 // Define the type for the API response
-interface BlogPostsApiResponse {
+export interface BlogPostsApiResponse {
   success: boolean
   posts?: BlogPost[]
   error?: string
