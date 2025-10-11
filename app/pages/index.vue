@@ -208,7 +208,7 @@ const { data: postsData, pending: postsPending, error: postsError } = await useC
 );
 
 // Fetch projects using static data fetching
-const { data: projectsData, pending: projectsPending, error: projectsError } = await useCachedAsyncData<GitHubApiResponse>(
+const { data: projectsData, pending: projectsPending, error: projectsError } = await useAsyncData<GitHubApiResponse>(
   'projects',
   () => $fetch('/api/github-projects')
 );
