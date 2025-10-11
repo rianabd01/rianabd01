@@ -198,48 +198,38 @@ useHead({
 });
 
 // Fetch blog posts using static data fetching
-const { data: postsData, pending: postsPending, error: postsError } = await useAsyncData(
+const { data: postsData, pending: postsPending, error: postsError } = await useCachedAsyncData(
   'homepage-posts',
-  () => $fetch('/api/blog-posts'),
-  {
-    server: true,
-    lazy: false
-  }
+  () => $fetch('/api/blog-posts')
 );
 
 // Fetch projects using static data fetching
-const { data: projectsData, pending: projectsPending, error: projectsError } = await useAsyncData(
+const { data: projectsData, pending: projectsPending, error: projectsError } = await useCachedAsyncData(
   'homepage-projects',
-  () => $fetch('/api/github-projects'),
-  {
-    server: true,
-    lazy: false
-  }
+  () => $fetch('/api/github-projects')
 );
 
 const latestPosts = computed(() => {
-  const posts = postsData.value?.success ? postsData.value.posts : [];
+  const posts = postsData.value?.success ? postsData.value.posts ?? [] : [];
 
-  // Add ID to each post
-  for (const post of posts) {
+  return posts.slice(0, 4).map((post) => {
     let id = "";
     if (post.link) {
-      // First, remove query parameters
       const urlWithoutParams = post.link.split("?")[0];
-
-      // Then extract the ID from the clean URL
       const urlParts = urlWithoutParams.split("-");
       id = urlParts[urlParts.length - 1] || "";
     }
-    post.id = id;
-  }
 
-  return posts.slice(0, 4); // Show only the latest 4 posts
+    return {
+      ...post,
+      id,
+    };
+  }); // Show only the latest 4 posts
 });
 
 const latestProjects = computed(() => {
   const projects = projectsData.value?.success
-    ? projectsData.value.projects
+    ? projectsData.value.projects ?? []
     : [];
   return projects.slice(0, 3); // Show only the latest 3 projects
 });

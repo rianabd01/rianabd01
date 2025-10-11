@@ -70,13 +70,9 @@ interface Project {
 }
 
 // Fetch projects using static data fetching
-const { data, pending, error } = await useAsyncData<GitHubApiResponse>(
+const { data, pending, error } = await useCachedAsyncData<GitHubApiResponse>(
   'projects',
-  () => $fetch('/api/github-projects'),
-  {
-    server: true,
-    lazy: false
-  }
+  () => $fetch('/api/github-projects')
 )
 
 const projects = computed<Project[]>(() => {
