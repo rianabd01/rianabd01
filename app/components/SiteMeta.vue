@@ -11,10 +11,10 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  title: 'Full Stack Developer Portfolio',
+  title: 'Full Stack Developer Portfolio | Rian',
   description: 'Portfolio of a Full Stack Developer showcasing skills, experience, projects, and blog.',
-  image: '/social-preview.jpg',
-  url: 'https://yourportfolio.com'
+  image: 'images/3d-persona.png',
+  url: 'https://rianspace.netlify.app'
 })
 
 useHead({

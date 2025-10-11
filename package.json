@@ -2,7 +2,7 @@
   "name": "full-stack-developer-portfolio",
   "type": "module",
   "version": "1.0.0",
-  "description": "A clean, modern portfolio website for a full stack developer built with Nuxt.js 3",
+  "description": "Rian's Portofolio",
   "private": true,
   "scripts": {
     "build": "nuxt build",
