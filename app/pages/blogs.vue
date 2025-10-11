@@ -2,13 +2,10 @@
   <div class="claude-container py-12">
     <h1 class="text-3xl font-bold mb-8">Blogs</h1>
     
-    <div v-if="loading" class="text-center py-12">
-      <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-      <p class="mt-4 text-muted-foreground">Loading blog posts...</p>
-    </div>
-    
-    <div v-else-if="error" class="text-center py-12">
-      <p class="text-red-500">Error loading blog posts: {{ error }}</p>
+    <div v-if="pending || error" class="text-center py-12">
+      <div v-if="pending" class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+      <p v-if="pending" class="mt-4 text-muted-foreground">Loading blog posts...</p>
+      <p v-if="error" class="text-red-500">Error loading blog posts</p>
     </div>
     
     <div v-else>
@@ -49,35 +46,17 @@ useHead({
   ]
 })
 
-// Reactive state
-const posts = ref([])
-const loading = ref(true)
-const error = ref(null)
-
-// Function to fetch blog posts
-const fetchBlogPosts = async () => {
-  try {
-    loading.value = true
-    error.value = null
-    
-    const response = await fetch('/api/blog-posts')
-    const data = await response.json()
-    
-    if (data.success) {
-      posts.value = data.posts
-    } else {
-      error.value = data.error || 'Failed to fetch blog posts'
-    }
-  } catch (err) {
-    error.value = err.message || 'Failed to fetch blog posts'
-  } finally {
-    loading.value = false
-  }
-}
+// Fetch blog posts using server-side fetching
+const { data, pending, error } = await useAsyncData(
+  'blogs',
+  () => $fetch('/api/blog-posts')
+)
 
 // Computed property to process posts with IDs
 const localPosts = computed(() => {
-  return posts.value.map(post => {
+  const posts = data.value?.success ? data.value.posts : [];
+  
+  return posts.map(post => {
     // Extract ID from Medium link
     let id = ''
     if (post.link) {
@@ -104,10 +83,5 @@ const formatDate = (dateString: string) => {
     month: 'long', 
     day: 'numeric' 
   })
-}
-
-// Fetch blog posts on component mount
-onMounted(() => {
-  fetchBlogPosts()
-})
+};;
 </script>

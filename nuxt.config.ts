@@ -27,5 +27,11 @@ export default defineNuxtConfig({
   },
   css: [
     './app/assets/css/main.css'
-  ]
+  ],
+  routeRules: {
+    '/api/**': { cors: true },
+    '/blog/**': { swr: true },
+    '/projects': { swr: true },
+    '/blogs': { swr: true }
+  }
 })

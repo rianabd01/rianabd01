@@ -68,16 +68,14 @@
         </NuxtLink>
       </div>
 
-      <div v-if="projectsPending" class="text-center py-8">
+      <div v-if="projectsPending || projectsError" class="text-center py-8">
         <div
+          v-if="projectsPending"
           class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"
         ></div>
-        <p class="mt-4 text-muted-foreground">Loading projects...</p>
-      </div>
-
-      <div v-else-if="projectsError" class="text-center py-8">
-        <p class="text-red-500">
-          Error loading projects: {{ projectsError }}
+        <p v-if="projectsPending" class="mt-4 text-muted-foreground">Loading projects...</p>
+        <p v-if="projectsError" class="text-red-500">
+          Error loading projects
         </p>
       </div>
 
@@ -141,16 +139,14 @@
         </NuxtLink>
       </div>
 
-      <div v-if="postsPending" class="text-center py-8">
+      <div v-if="postsPending || postsError" class="text-center py-8">
         <div
+          v-if="postsPending"
           class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"
         ></div>
-        <p class="mt-4 text-muted-foreground">Loading blog posts...</p>
-      </div>
-
-      <div v-else-if="postsError" class="text-center py-8">
-        <p class="text-red-500">
-          Error loading blog posts: {{ postsError }}
+        <p v-if="postsPending" class="mt-4 text-muted-foreground">Loading blog posts...</p>
+        <p v-if="postsError" class="text-red-500">
+          Error loading blog posts
         </p>
       </div>
 
@@ -201,19 +197,17 @@ useHead({
   ],
 });
 
-// Fetch blog posts
-const {
-  data: postsData,
-  pending: postsPending,
-  error: postsError,
-} = await useFetch("/api/blog-posts");
+// Fetch blog posts using server-side fetching
+const { data: postsData, pending: postsPending, error: postsError } = await useAsyncData(
+  'homepage-posts',
+  () => $fetch('/api/blog-posts')
+);
 
-// Fetch projects
-const {
-  data: projectsData,
-  pending: projectsPending,
-  error: projectsError,
-} = await useFetch("/api/github-projects");
+// Fetch projects using server-side fetching
+const { data: projectsData, pending: projectsPending, error: projectsError } = await useAsyncData(
+  'homepage-projects',
+  () => $fetch('/api/github-projects')
+);
 
 const latestPosts = computed(() => {
   const posts = postsData.value?.success ? postsData.value.posts : [];
