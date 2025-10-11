@@ -64,13 +64,9 @@ interface BlogPost {
 }
 
 // Fetch blog posts using static data fetching
-const { data, pending, error } = await useAsyncData<BlogPostsApiResponse>(
+const { data, pending, error } = await useCachedAsyncData<BlogPostsApiResponse>(
   'blogs',
-  () => $fetch('/api/blog-posts'),
-  {
-    server: true,
-    lazy: false
-  }
+  () => $fetch('/api/blog-posts')
 )
 
 // Computed property to process posts with IDs
