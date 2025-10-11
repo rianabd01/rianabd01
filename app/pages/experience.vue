@@ -19,9 +19,10 @@
             </div>
             <h3 class="text-primary font-medium mb-3">PT Ganapatih Akasa Solutions - South Jakarta - Full time</h3>
             <ul class="list-disc pl-5 space-y-2 text-muted-foreground">
-              <li>Developed and maintained an e-learning platform using Next.js</li>
-              <li>Built and integrated REST API using Golang with Fiber</li>
-              <li>Integrated Telegram MTProto and headless automation services into the API</li>
+              <li>Developed and maintained an e-learning platform using Next.js, ensuring fast performance and responsive design</li>
+              <li>Built and integrated RESTful APIs using Golang (Fiber framework) for high scalability and efficiency</li>
+              <li>Integrated Telegram MTProto and headless automation services into the backend</li>
+              <li>Implemented and managed job queues using RabbitMQ to optimize background processing</li>
             </ul>
           </div>
         </div>
