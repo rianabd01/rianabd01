@@ -29,9 +29,15 @@ export default defineNuxtConfig({
     './app/assets/css/main.css'
   ],
   routeRules: {
-    '/api/**': { cors: true },
-    '/blog/**': { swr: true },
-    '/projects': { swr: true },
-    '/blogs': { swr: true }
+    '/': { prerender: true },
+    '/blogs': { prerender: true },
+    '/projects': { prerender: true },
+    '/blog/**': { prerender: true },
+    '/api/**': { cors: true }
+  },
+  nitro: {
+    prerender: {
+      crawlLinks: true
+    }
   }
 })

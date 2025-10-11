@@ -40,14 +40,36 @@ definePageMeta({
 const route = useRoute()
 const postId = route.params.slug
 
-// Fetch blog post using server-side fetching
-const { data, pending, error } = await useAsyncData(
+// Define the type for the API response
+interface BlogPostApiResponse {
+  success: boolean
+  post?: BlogPost
+  error?: string
+}
+
+interface BlogPost {
+  title: string
+  link: string
+  pubDate: string
+  content: string
+  categories: string[]
+  creator: string
+}
+
+// Fetch blog post using static data fetching
+const { data, pending, error } = await useAsyncData<BlogPostApiResponse>(
   `blog-post-${postId}`,
-  () => $fetch(`/api/blog-post?id=${postId}`)
+  () => $fetch(`/api/blog-post?id=${postId}`),
+  {
+    server: true,
+    lazy: false
+  }
 )
 
-const post = computed(() => {
-  return data.value?.success ? data.value.post : null
+const post = computed<BlogPost | null>(() => {
+  if (!data.value) return null
+  if (!data.value.success) return null
+  return data.value.post || null
 })
 
 useHead({
@@ -68,5 +90,5 @@ const formatDate = (dateString: string) => {
     month: 'long', 
     day: 'numeric' 
   })
-}
+};
 </script>

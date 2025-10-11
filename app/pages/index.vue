@@ -197,16 +197,24 @@ useHead({
   ],
 });
 
-// Fetch blog posts using server-side fetching
+// Fetch blog posts using static data fetching
 const { data: postsData, pending: postsPending, error: postsError } = await useAsyncData(
   'homepage-posts',
-  () => $fetch('/api/blog-posts')
+  () => $fetch('/api/blog-posts'),
+  {
+    server: true,
+    lazy: false
+  }
 );
 
-// Fetch projects using server-side fetching
+// Fetch projects using static data fetching
 const { data: projectsData, pending: projectsPending, error: projectsError } = await useAsyncData(
   'homepage-projects',
-  () => $fetch('/api/github-projects')
+  () => $fetch('/api/github-projects'),
+  {
+    server: true,
+    lazy: false
+  }
 );
 
 const latestPosts = computed(() => {

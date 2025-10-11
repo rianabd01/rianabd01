@@ -49,13 +49,39 @@ useHead({
   ]
 })
 
-// Fetch projects using server-side fetching
-const { data, pending, error } = await useAsyncData(
+// Define the type for the API response
+interface GitHubApiResponse {
+  success: boolean
+  projects?: Project[]
+  error?: string
+  timestamp?: string
+  fetchedAt?: number
+}
+
+interface Project {
+  id: number
+  name: string
+  description: string
+  topics: string[]
+  html_url: string
+  homepage: string
+  stargazers_count: number
+  language: string
+}
+
+// Fetch projects using static data fetching
+const { data, pending, error } = await useAsyncData<GitHubApiResponse>(
   'projects',
-  () => $fetch('/api/github-projects')
+  () => $fetch('/api/github-projects'),
+  {
+    server: true,
+    lazy: false
+  }
 )
 
-const projects = computed(() => {
-  return data.value?.success ? data.value.projects : []
-})
+const projects = computed<Project[]>(() => {
+  if (!data.value) return []
+  if (!data.value.success) return []
+  return data.value.projects || []
+});
 </script>

@@ -46,22 +46,43 @@ useHead({
   ]
 })
 
-// Fetch blog posts using server-side fetching
-const { data, pending, error } = await useAsyncData(
+// Define the type for the API response
+interface BlogPostsApiResponse {
+  success: boolean
+  posts?: BlogPost[]
+  error?: string
+}
+
+interface BlogPost {
+  title: string
+  link: string
+  pubDate: string
+  contentSnippet: string
+  categories: string[]
+  creator: string
+  id?: string
+}
+
+// Fetch blog posts using static data fetching
+const { data, pending, error } = await useAsyncData<BlogPostsApiResponse>(
   'blogs',
-  () => $fetch('/api/blog-posts')
+  () => $fetch('/api/blog-posts'),
+  {
+    server: true,
+    lazy: false
+  }
 )
 
 // Computed property to process posts with IDs
-const localPosts = computed(() => {
-  const posts = data.value?.success ? data.value.posts : [];
+const localPosts = computed<BlogPost[]>(() => {
+  const posts = data.value?.success && data.value.posts ? data.value.posts : [];
   
   return posts.map(post => {
     // Extract ID from Medium link
     let id = ''
     if (post.link) {
       // First, remove query parameters
-      const urlWithoutParams = post.link.split('?')[0]
+      const urlWithoutParams = post.link.split('?')[0] ?? ''
       
       // Then extract the ID from the clean URL
       const urlParts = urlWithoutParams.split('-')
@@ -73,7 +94,7 @@ const localPosts = computed(() => {
       id
     }
   })
-})
+});
 
 const formatDate = (dateString: string) => {
   if (!dateString) return ''
@@ -83,5 +104,5 @@ const formatDate = (dateString: string) => {
     month: 'long', 
     day: 'numeric' 
   })
-};;
+};
 </script>
