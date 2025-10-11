@@ -60,6 +60,79 @@
       </div>
     </section>
 
+    <section class="mb-16">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-bold">Latest Projects</h2>
+        <NuxtLink to="/projects" class="text-primary hover:underline">
+          View All Projects
+        </NuxtLink>
+      </div>
+
+      <div v-if="projectsPending" class="text-center py-8">
+        <div
+          class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"
+        ></div>
+        <p class="mt-4 text-muted-foreground">Loading projects...</p>
+      </div>
+
+      <div v-else-if="projectsError" class="text-center py-8">
+        <p class="text-red-500">
+          Error loading projects: {{ projectsError }}
+        </p>
+      </div>
+
+      <div v-else>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            v-for="project in latestProjects"
+            :key="project.id"
+            class="claude-card overflow-hidden"
+          >
+            <div class="bg-gray-200 border-2 border-dashed w-full h-48" />
+            <div class="p-6">
+              <h3 class="font-semibold text-lg mb-2">{{ project.name }}</h3>
+              <p class="text-muted-foreground mb-4">
+                {{ project.description || "No description available" }}
+              </p>
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span
+                  v-if="project.language"
+                  class="bg-secondary text-secondary-foreground text-xs px-2 py-1 rounded"
+                  >{{ project.language }}</span
+                >
+                <span
+                  v-for="topic in project.topics.slice(0, 2)"
+                  :key="topic"
+                  class="bg-secondary text-secondary-foreground text-xs px-2 py-1 rounded"
+                >
+                  {{ topic }}
+                </span>
+              </div>
+              <div class="flex space-x-3">
+                <a
+                  v-if="project.homepage"
+                  :href="project.homepage"
+                  target="_blank"
+                  class="text-sm text-primary hover:underline"
+                  >Live Demo</a
+                >
+                <a
+                  :href="project.html_url"
+                  target="_blank"
+                  class="text-sm text-primary hover:underline"
+                  >Source Code</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="latestProjects.length === 0" class="text-center py-8">
+          <p class="text-muted-foreground">No projects found.</p>
+        </div>
+      </div>
+    </section>
+
     <section>
       <div class="flex justify-between items-center mb-8">
         <h2 class="text-3xl font-bold">Latest Blog Posts</h2>
@@ -68,16 +141,16 @@
         </NuxtLink>
       </div>
 
-      <div v-if="pending" class="text-center py-8">
+      <div v-if="postsPending" class="text-center py-8">
         <div
           class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"
         ></div>
         <p class="mt-4 text-muted-foreground">Loading blog posts...</p>
       </div>
 
-      <div v-else-if="error" class="text-center py-8">
+      <div v-else-if="postsError" class="text-center py-8">
         <p class="text-red-500">
-          Error loading blog posts: {{ error.message }}
+          Error loading blog posts: {{ postsError }}
         </p>
       </div>
 
@@ -128,11 +201,24 @@ useHead({
   ],
 });
 
-const { data, pending, error } = await useFetch("/api/blog-posts");
+// Fetch blog posts
+const {
+  data: postsData,
+  pending: postsPending,
+  error: postsError,
+} = await useFetch("/api/blog-posts");
+
+// Fetch projects
+const {
+  data: projectsData,
+  pending: projectsPending,
+  error: projectsError,
+} = await useFetch("/api/github-projects");
 
 const latestPosts = computed(() => {
-  const posts = data.value?.posts || [];
+  const posts = postsData.value?.success ? postsData.value.posts : [];
 
+  // Add ID to each post
   for (const post of posts) {
     let id = "";
     if (post.link) {
@@ -147,5 +233,12 @@ const latestPosts = computed(() => {
   }
 
   return posts.slice(0, 4); // Show only the latest 4 posts
+});
+
+const latestProjects = computed(() => {
+  const projects = projectsData.value?.success
+    ? projectsData.value.projects
+    : [];
+  return projects.slice(0, 3); // Show only the latest 3 projects
 });
 </script>
