@@ -2,14 +2,13 @@
   <div class="claude-container py-12">
     <h1 class="text-3xl font-bold mb-8">Projects</h1>
     
-    <div v-if="pending" class="text-center py-12">
+    <div v-if="loading" class="text-center py-12">
       <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
       <p class="mt-4 text-muted-foreground">Loading projects...</p>
     </div>
     
     <div v-else-if="error" class="text-center py-12">
-      <p class="text-red-500">Error loading projects: {{ error.message }}</p>
-      <button @click="refresh" class="claude-btn-primary mt-4">Retry</button>
+      <p class="text-red-500">Error loading projects: {{ error }}</p>
     </div>
     
     <div v-else>
@@ -34,7 +33,8 @@
       </div>
       
       <div v-if="projects.length === 0" class="text-center py-12">
-        <p class="text-muted-foreground">No projects found.</p>
+        <p class="text-muted-foreground">No projects found with "portofolio" topic.</p>
+        <p class="text-sm text-muted-foreground mt-2">Make sure your GitHub repositories have the "portofolio" topic assigned.</p>
       </div>
     </div>
   </div>
@@ -52,9 +52,34 @@ useHead({
   ]
 })
 
-const { data, pending, error, refresh } = await useFetch('/api/github-projects')
+// Reactive state
+const projects = ref([])
+const loading = ref(true)
+const error = ref(null)
 
-const projects = computed(() => {
-  return data.value?.success ? data.value.projects : []
+// Function to fetch projects
+const fetchProjects = async () => {
+  try {
+    loading.value = true
+    error.value = null
+    
+    const response = await fetch('/api/github-projects')
+    const data = await response.json()
+    
+    if (data.success) {
+      projects.value = data.projects
+    } else {
+      error.value = data.error || 'Failed to fetch projects'
+    }
+  } catch (err) {
+    error.value = err.message || 'Failed to fetch projects'
+  } finally {
+    loading.value = false
+  }
+}
+
+// Fetch projects on component mount
+onMounted(() => {
+  fetchProjects()
 })
 </script>

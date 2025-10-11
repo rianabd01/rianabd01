@@ -2,14 +2,13 @@
   <div class="claude-container py-12">
     <h1 class="text-3xl font-bold mb-8">Blogs</h1>
     
-    <div v-if="pending" class="text-center py-12">
+    <div v-if="loading" class="text-center py-12">
       <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
       <p class="mt-4 text-muted-foreground">Loading blog posts...</p>
     </div>
     
     <div v-else-if="error" class="text-center py-12">
-      <p class="text-red-500">Error loading blog posts: {{ error.message }}</p>
-      <button @click="refresh" class="claude-btn-primary mt-4">Retry</button>
+      <p class="text-red-500">Error loading blog posts: {{ error }}</p>
     </div>
     
     <div v-else>
@@ -50,12 +49,35 @@ useHead({
   ]
 })
 
-const { data, pending, error, refresh } = await useFetch('/api/blog-posts')
+// Reactive state
+const posts = ref([])
+const loading = ref(true)
+const error = ref(null)
 
+// Function to fetch blog posts
+const fetchBlogPosts = async () => {
+  try {
+    loading.value = true
+    error.value = null
+    
+    const response = await fetch('/api/blog-posts')
+    const data = await response.json()
+    
+    if (data.success) {
+      posts.value = data.posts
+    } else {
+      error.value = data.error || 'Failed to fetch blog posts'
+    }
+  } catch (err) {
+    error.value = err.message || 'Failed to fetch blog posts'
+  } finally {
+    loading.value = false
+  }
+}
+
+// Computed property to process posts with IDs
 const localPosts = computed(() => {
-  if (!data.value?.posts) return []
-  
-  return data.value.posts.map(post => {
+  return posts.value.map(post => {
     // Extract ID from Medium link
     let id = ''
     if (post.link) {
@@ -83,4 +105,9 @@ const formatDate = (dateString: string) => {
     day: 'numeric' 
   })
 }
+
+// Fetch blog posts on component mount
+onMounted(() => {
+  fetchBlogPosts()
+})
 </script>
