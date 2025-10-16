@@ -216,7 +216,7 @@ const {
   data: projectsData,
   pending: projectsPending,
   error: projectsError,
-} = await useAsyncData<GitHubApiResponse>("projects", () =>
+} = await useCachedAsyncData<GitHubApiResponse>("projects", () =>
   $fetch("/api/github-projects")
 );
 
