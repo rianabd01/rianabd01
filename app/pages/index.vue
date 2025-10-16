@@ -12,13 +12,12 @@
             Software Engineer
           </h2>
           <p class="text-lg mb-8 text-muted-foreground">
-            I craft fast, accessible, and visually engaging digital experiences.
-            My focus is on building products that people love to use — and that
-            make your brand stand out.
+            I design fast, accessible, and scalable digital experiences. My
+            focus is on creating products that are useful for people to use.
           </p>
           <div class="flex space-x-4">
             <NuxtLink to="/projects" class="claude-btn-primary">
-              View My Work
+              View Rian's Work
             </NuxtLink>
             <NuxtLink to="/experience" class="claude-btn-secondary">
               Experience
@@ -45,7 +44,7 @@
         </div>
         <div class="claude-card p-6">
           <h3 class="font-semibold mb-2">Backend</h3>
-          <p class="text-sm text-muted-foreground">Node.js, Golang</p>
+          <p class="text-sm text-muted-foreground">Node.js, Golang, RabbitMQ</p>
         </div>
         <div class="claude-card p-6">
           <h3 class="font-semibold mb-2">Database</h3>
@@ -55,7 +54,9 @@
         </div>
         <div class="claude-card p-6">
           <h3 class="font-semibold mb-2">DevOps</h3>
-          <p class="text-sm text-muted-foreground">Docker, AWS, CI/CD</p>
+          <p class="text-sm text-muted-foreground">
+            Docker, Portainer, AWS, CI/CD
+          </p>
         </div>
       </div>
     </section>
@@ -73,10 +74,10 @@
           v-if="projectsPending"
           class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"
         ></div>
-        <p v-if="projectsPending" class="mt-4 text-muted-foreground">Loading projects...</p>
-        <p v-if="projectsError" class="text-red-500">
-          Error loading projects
+        <p v-if="projectsPending" class="mt-4 text-muted-foreground">
+          Loading projects...
         </p>
+        <p v-if="projectsError" class="text-red-500">Error loading projects</p>
       </div>
 
       <div v-else>
@@ -111,8 +112,8 @@
                   v-if="project.homepage"
                   :href="project.homepage"
                   target="_blank"
-                  class="text-sm text-primary hover:underline"
-                  >Live Demo</a
+                  class="text-sm text-white bg-blue-400 hover:bg-blue-500 hover:underline"
+                  >View Demo</a
                 >
                 <a
                   :href="project.html_url"
@@ -144,10 +145,10 @@
           v-if="postsPending"
           class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"
         ></div>
-        <p v-if="postsPending" class="mt-4 text-muted-foreground">Loading blog posts...</p>
-        <p v-if="postsError" class="text-red-500">
-          Error loading blog posts
+        <p v-if="postsPending" class="mt-4 text-muted-foreground">
+          Loading blog posts...
         </p>
+        <p v-if="postsError" class="text-red-500">Error loading blog posts</p>
       </div>
 
       <div v-else>
@@ -186,9 +187,9 @@
 </template>
 
 <script setup lang="ts">
-import { useCachedAsyncData } from '~/composables/useCachedAsyncData';
-import type { GitHubApiResponse } from './projects.vue';
-import type { BlogPostsApiResponse } from './blogs.vue';
+import { useCachedAsyncData } from "~/composables/useCachedAsyncData";
+import type { GitHubApiResponse } from "./projects.vue";
+import type { BlogPostsApiResponse } from "./blogs.vue";
 
 definePageMeta({
   title: "Home",
@@ -202,15 +203,21 @@ useHead({
 });
 
 // Fetch blog posts using static data fetching
-const { data: postsData, pending: postsPending, error: postsError } = await useCachedAsyncData<BlogPostsApiResponse>(
-  'blogs',
-  () => $fetch('/api/blog-posts')
+const {
+  data: postsData,
+  pending: postsPending,
+  error: postsError,
+} = await useCachedAsyncData<BlogPostsApiResponse>("blogs", () =>
+  $fetch("/api/blog-posts")
 );
 
 // Fetch projects using static data fetching
-const { data: projectsData, pending: projectsPending, error: projectsError } = await useAsyncData<GitHubApiResponse>(
-  'projects',
-  () => $fetch('/api/github-projects')
+const {
+  data: projectsData,
+  pending: projectsPending,
+  error: projectsError,
+} = await useAsyncData<GitHubApiResponse>("projects", () =>
+  $fetch("/api/github-projects")
 );
 
 const latestPosts = computed(() => {
