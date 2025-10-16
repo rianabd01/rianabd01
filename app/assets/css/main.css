@@ -1,8 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "dogica";
+  src: url("/fonts/0xProtoNerdFont-Regular.ttf") format("truetype");
+  font-weight: 100;
+  font-size: x-small;
+  font-style: normal;
+  font-display: swap;
+}
 
 @layer base {
   :root {
@@ -58,25 +67,30 @@
   body {
     @apply bg-white text-gray-900;
     font-feature-settings: "rlig" 1, "calt" 1;
-    font-family: 'Inter', sans-serif;
+    font-family: "dogica", sans-serif;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold;
   }
-  
+
   h1 {
     @apply text-3xl md:text-4xl;
   }
-  
+
   h2 {
     @apply text-2xl md:text-3xl;
   }
-  
+
   h3 {
     @apply text-xl md:text-2xl;
   }
-  
+
   p {
     @apply leading-relaxed;
   }
@@ -110,39 +124,39 @@
   .claude-nav-link-active {
     @apply text-blue-600;
   }
-  
+
   .text-muted-foreground {
     @apply text-gray-500;
   }
-  
+
   .bg-muted {
     @apply bg-gray-100;
   }
-  
+
   .bg-card {
     @apply bg-white;
   }
-  
+
   .text-card-foreground {
     @apply text-gray-900;
   }
-  
+
   .bg-primary {
     @apply bg-blue-600;
   }
-  
+
   .text-primary-foreground {
     @apply text-white;
   }
-  
+
   .bg-secondary {
     @apply bg-gray-100;
   }
-  
+
   .text-secondary-foreground {
     @apply text-gray-900;
   }
-  
+
   .ring-offset-background {
     @apply ring-offset-white;
   }
