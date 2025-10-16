@@ -83,9 +83,7 @@ const { data, pending, error } = await useCachedAsyncData<BlogPostApiResponse>(
 );
 
 const post = computed<BlogPost | null>(() => {
-  if (!data.value) return null;
-  if (!data.value.success) return null;
-  return data.value.post || null;
+  return data.value?.post || null;
 });
 
 useHead({

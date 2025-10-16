@@ -116,8 +116,6 @@ const { data, pending, error } = await useCachedAsyncData<GitHubApiResponse>(
 );
 
 const projects = computed<Project[]>(() => {
-  if (!data.value) return [];
-  if (!data.value.success) return [];
-  return data.value.projects || [];
+  return data.value?.projects || [];
 });
 </script>

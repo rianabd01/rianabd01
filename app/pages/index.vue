@@ -221,7 +221,7 @@ const {
 );
 
 const latestPosts = computed(() => {
-  const posts = postsData.value?.success ? postsData.value.posts ?? [] : [];
+  const posts = postsData.value.posts || [];
 
   return posts.slice(0, 4).map((post) => {
     let id = "";
@@ -239,9 +239,7 @@ const latestPosts = computed(() => {
 });
 
 const latestProjects = computed(() => {
-  const projects = projectsData.value?.success
-    ? projectsData.value.projects ?? []
-    : [];
+  const projects = projectsData.value.projects || [];
   return projects.slice(0, 3); // Show only the latest 3 projects
 });
 </script>
