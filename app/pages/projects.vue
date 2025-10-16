@@ -45,8 +45,8 @@
                 v-if="project.homepage"
                 :href="project.homepage"
                 target="_blank"
-                class="text-sm text-primary hover:underline"
-                >Live Demo</a
+                class="text-sm text-white bg-blue-400 hover:bg-blue-500 hover:underline"
+                >View Demo</a
               >
               <a
                 :href="project.html_url"
