@@ -12,9 +12,9 @@
 
 <script setup lang="ts">
 const skills = [
-  { title: 'Frontend', items: 'Next.js, Vanilla Js' },
-  { title: 'Backend', items: 'Node.js, Golang' },
-  { title: 'Database', items: 'MySQL, PostgreSQL, MongoDB' },
-  { title: 'DevOps', items: 'Docker, AWS, CI/CD' },
-]
+	{ title: "Frontend", items: "Next.js, React, TypeScript" },
+	{ title: "Backend", items: "Golang, Express.js, Node.js" },
+	{ title: "Database", items: "MongoDB, PostgreSQL, MySQL" },
+	{ title: "DevOps", items: "Docker, RabbitMQ, CI/CD" },
+];
 </script>
