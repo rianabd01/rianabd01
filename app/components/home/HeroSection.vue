@@ -9,9 +9,8 @@
           Software Engineer
         </h2>
         <p class="text-lg mb-8 text-muted-foreground font-sans">
-          I craft fast, accessible, and visually engaging digital experiences.
-          My focus is on building products that people love to use — and that
-          make your brand stand out.
+         I design fast, accessible, and scalable digital experiences. My
+            focus is on creating products that are useful for people to use.
         </p>
         <div class="flex space-x-4">
           <NuxtLink to="/projects" class="claude-btn-primary">

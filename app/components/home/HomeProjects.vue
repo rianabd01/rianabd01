@@ -25,15 +25,15 @@
 </template>
 
 <script setup lang="ts">
-import type { GitHubApiResponse } from '~/types'
+import type { GitHubApiResponse } from "~/types";
 
-const { data, pending, error } = await useAsyncData<GitHubApiResponse>(
-  'home-projects',
-  () => $fetch('/api/github-projects')
-)
+const { data, pending, error } = await useCachedAsyncData<GitHubApiResponse>(
+	"home-projects",
+	() => $fetch("/api/github-projects"),
+);
 
 const latestProjects = computed(() => {
-  const projects = data.value?.success ? data.value.projects ?? [] : []
-  return projects.slice(0, 3)
-})
+	const projects = data.value?.success ? (data.value.projects ?? []) : [];
+	return projects.slice(0, 3);
+});
 </script>

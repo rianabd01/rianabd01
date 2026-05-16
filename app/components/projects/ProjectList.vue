@@ -24,27 +24,30 @@
 </template>
 
 <script setup lang="ts">
-import type { GitHubApiResponse } from '~/types'
+import type { GitHubApiResponse } from "~/types";
 
 definePageMeta({
-  title: 'Projects'
-})
+	title: "Projects",
+});
 
 useHead({
-  title: 'Projects',
-  meta: [
-    { name: 'description', content: 'Showcase of my development projects and applications' }
-  ]
-})
+	title: "Projects",
+	meta: [
+		{
+			name: "description",
+			content: "Showcase of my development projects and applications",
+		},
+	],
+});
 
-const { data, pending, error } = await useAsyncData<GitHubApiResponse>(
-  'projects',
-  () => $fetch('/api/github-projects')
-)
+const { data, pending, error } = await useCachedAsyncData<GitHubApiResponse>(
+	"projects",
+	() => $fetch("/api/github-projects"),
+);
 
 const projects = computed(() => {
-  if (!data.value) return []
-  if (!data.value.success) return []
-  return data.value.projects || []
-})
+	if (!data.value) return [];
+	if (!data.value.success) return [];
+	return data.value.projects || [];
+});
 </script>

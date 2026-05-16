@@ -16,7 +16,7 @@
       </div>
       <div class="flex space-x-3">
         <a v-if="project.homepage" :href="project.homepage" target="_blank" class="text-sm text-primary hover:underline font-sans">
-          Live Demo
+          View Demo
         </a>
         <a :href="project.html_url" target="_blank" class="text-sm text-primary hover:underline font-sans">
           Source Code
@@ -27,9 +27,9 @@
 </template>
 
 <script setup lang="ts">
-import type { GitHubProject } from '~/types'
+import type { GitHubProject } from "~/types";
 
 defineProps<{
-  project: GitHubProject
-}>()
+	project: GitHubProject;
+}>();
 </script>
