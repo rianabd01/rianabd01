@@ -67,16 +67,15 @@ interface Project {
   homepage: string
   stargazers_count: number
   language: string
+  created_at: string
+  updated_at: string
+  pushed_at: string
 }
 
 // Fetch projects using static data fetching
-const { data, pending, error } = await useAsyncData<GitHubApiResponse>(
+const { data, pending, error } = await useCachedAsyncData<GitHubApiResponse>(
   'projects',
-  () => $fetch('/api/github-projects'),
-  {
-    server: true,
-    lazy: false
-  }
+  () => $fetch('/api/github-projects')
 )
 
 const projects = computed<Project[]>(() => {

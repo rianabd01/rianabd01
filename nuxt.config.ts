@@ -37,7 +37,11 @@ export default defineNuxtConfig({
   },
   nitro: {
     prerender: {
-      crawlLinks: true
+      crawlLinks: true,
+      routes: [
+        '/api/blog-posts',
+        '/api/github-projects'
+      ]
     }
   }
 })
