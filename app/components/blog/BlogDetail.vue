@@ -1,0 +1,74 @@
+<template>
+  <div class="claude-container py-12">
+    <NuxtLink to="/blogs" class="flex items-center text-primary hover:underline mb-6 font-sans">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+      </svg>
+      Back to Blogs
+    </NuxtLink>
+
+    <div v-if="pending || error" class="text-center py-12">
+      <UiSpinner v-if="pending" />
+      <p v-if="pending" class="mt-4 text-muted-foreground font-sans">Loading blog post...</p>
+      <p v-if="error" class="text-[#b8653a] font-sans">Error loading blog post</p>
+    </div>
+
+    <article v-else-if="post" class="claude-card p-6">
+      <header class="mb-8">
+        <h1 class="font-bold mb-4">{{ post.title }}</h1>
+        <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground font-sans">
+          <span>{{ formatDate(post.pubDate) }}</span>
+          <span>•</span>
+          <span>{{ post.categories?.join(', ') }}</span>
+        </div>
+      </header>
+      <div class="prose max-w-none" v-html="post.content" />
+    </article>
+
+    <div v-else class="claude-card p-6 text-center">
+      <p class="text-muted-foreground font-sans">Blog post not found.</p>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import type { BlogPostApiResponse } from '~/types'
+
+definePageMeta({
+  title: 'Blog Post'
+})
+
+const route = useRoute()
+const postId = route.params.slug
+
+const { data, pending, error } = await useCachedAsyncData<BlogPostApiResponse>(
+  `blog-post-${postId}`,
+  () => $fetch(`/api/blog-post?id=${postId}`)
+)
+
+const post = computed(() => {
+  if (!data.value) return null
+  if (!data.value.success) return null
+  return data.value.post || null
+})
+
+useHead({
+  title: computed(() => post.value?.title || 'Blog Post'),
+  meta: [
+    {
+      name: 'description',
+      content: computed(() => post.value?.content?.substring(0, 160) + '...' || 'Blog post')
+    }
+  ]
+})
+
+const formatDate = (dateString: string) => {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+}
+</script>
