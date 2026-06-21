@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   try {
     // Add a timestamp to the request to bust any possible caching
     const timestamp = new Date().getTime()
-    const url = `https://api.github.com/users/rianabd01/repos?timestamp=${timestamp}`
+    const url = `https://api.github.com/users/rianabd01/repos?sort=pushed&direction=desc&per_page=100&timestamp=${timestamp}`
     
     // Fetch repositories from GitHub API with cache busting
     const response = await fetch(url, {
