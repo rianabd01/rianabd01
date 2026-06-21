@@ -11,14 +11,15 @@ export default defineEventHandler(async (event) => {
   const GITHUB_API_TOKEN = process.env.GITHUB_API_TOKEN ?? "";
 
   try {
-    const response = await fetch(
-      "https://api.github.com/users/rianabd01/repos?per_page=100",
-      {
-        headers: {
-          Accept: "application/vnd.github+json",
-          "X-GitHub-Api-Version": "2022-11-28",
-          Authorization: `Bearer ${GITHUB_API_TOKEN}`,
-        },
+    // Add a timestamp to the request to bust any possible caching
+    const timestamp = new Date().getTime()
+    const url = `https://api.github.com/users/rianabd01/repos?sort=pushed&direction=desc&per_page=100&timestamp=${timestamp}`
+    
+    // Fetch repositories from GitHub API with cache busting
+    const response = await fetch(url, {
+      headers: {
+        'User-Agent': 'portfolio-website',
+        'Accept': 'application/vnd.github.v3+json'
       }
     );
 
