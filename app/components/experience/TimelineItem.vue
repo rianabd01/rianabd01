@@ -17,12 +17,7 @@
 </template>
 
 <script setup lang="ts">
-export interface TimelineItemData {
-  role: string
-  period: string
-  company: string
-  details: string[]
-}
+import type { TimelineItemData } from '~/types'
 
 defineProps<{
   item: TimelineItemData

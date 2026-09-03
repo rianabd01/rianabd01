@@ -1,0 +1,26 @@
+{
+  "greeting": "Hi, I'm",
+  "name": "Rian",
+  "role": "Software Engineer",
+  "description": "Building resilient, high-throughput distributed systems with Golang & RabbitMQ, while crafting sleek, high-performance web experiences using Next.js & React.",
+  "socials": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/rianabd01",
+      "icon": "github"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://linkedin.com/in/rianwahyuab",
+      "icon": "linkedin"
+    }
+  ],
+  "primaryCta": {
+    "text": "view my projects",
+    "link": "/projects"
+  },
+  "secondaryCta": {
+    "text": "experience",
+    "link": "/experience"
+  }
+}

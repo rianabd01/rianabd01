@@ -13,7 +13,17 @@
         <div v-for="post in localPosts" :key="post.id" class="claude-card p-6">
           <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
             <h2 class="text-xl font-bold mb-2 font-display text-xs">{{ post.title }}</h2>
-            <span class="text-sm text-muted-foreground font-sans">{{ formatDate(post.pubDate) }}</span>
+            <div class="flex items-center gap-2 text-sm text-muted-foreground font-sans shrink-0">
+              <span>{{ formatDate(post.pubDate) }}</span>
+              <span v-if="post.readingTime">•</span>
+              <span v-if="post.readingTime" class="flex items-center gap-1">
+                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                {{ post.readingTime }} min read
+              </span>
+            </div>
           </div>
           <p class="text-muted-foreground mb-4 font-sans text-sm">{{ post.contentSnippet }}</p>
           <div class="flex flex-wrap gap-2 mb-4">

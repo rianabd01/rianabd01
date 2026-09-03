@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" shape-rendering="crispEdges">
+  <!-- Hair -->
+  <rect x="5" y="1" width="6" height="1" fill="#3a2a1a"/>
+  <rect x="4" y="2" width="8" height="1" fill="#3a2a1a"/>
+  <rect x="3" y="3" width="10" height="2" fill="#3a2a1a"/>
+  <!-- Face -->
+  <rect x="4" y="5" width="8" height="5" fill="#f5d6b8"/>
+  <rect x="3" y="5" width="1" height="2" fill="#3a2a1a"/>
+  <rect x="12" y="5" width="1" height="2" fill="#3a2a1a"/>
+  <!-- Eyes -->
+  <rect x="5" y="6" width="2" height="2" fill="#3a2a1a"/>
+  <rect x="9" y="6" width="2" height="2" fill="#3a2a1a"/>
+  <!-- Mouth -->
+  <rect x="7" y="8" width="2" height="1" fill="#b8653a"/>
+  <!-- Neck -->
+  <rect x="6" y="10" width="4" height="1" fill="#f5d6b8"/>
+  <!-- Shirt -->
+  <rect x="3" y="11" width="10" height="4" fill="#5e7d4e"/>
+  <rect x="7" y="11" width="2" height="4" fill="#4e6e3e"/>
+  <!-- Left Hand -->
+  <rect x="1" y="12" width="2" height="3" fill="#f5d6b8"/>
+  <!-- Right Arm (Wave) -->
+  <rect x="12" y="9" width="2" height="2" fill="#5e7d4e"/>
+  <rect x="13" y="4" width="3" height="4" fill="#f5d6b8"/>
+</svg>

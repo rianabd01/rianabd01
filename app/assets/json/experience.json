@@ -1,0 +1,42 @@
+[
+  {
+    "role": "Mid Engineer",
+    "period": "April 2025 – Present",
+    "company": "PT Ganapatih Akasa Solutions - South Jakarta - Full time",
+    "details": [
+      "Architected high-throughput REST APIs in Golang, handling 100k+ records with low latency",
+      "Optimized background task processing & message queues using RabbitMQ to boost reliability",
+      "Integrated AI/LLM capabilities and automated data ingestion pipelines into core backend services",
+      "Implemented secure enterprise authentication & SSO using OpenID Connect (OIDC)"
+    ]
+  },
+  {
+    "role": "Full Stack Developer",
+    "period": "October 2024 – April 2025",
+    "company": "PT Evetech Solution - Sukoharjo - Full time",
+    "details": [
+      "Delivered 15+ core modules for an enterprise ERP system, simplifying complex business workflows",
+      "Built reliable backend services with Express.js & MongoDB, alongside complete API documentation",
+      "Boosted SEO rankings and page speed by implementing Next.js Server-Side Generation (SSG)",
+      "Engineered real-time notification systems to increase user engagement"
+    ]
+  },
+  {
+    "role": "React Developer",
+    "period": "August 2024 – December 2024",
+    "company": "Peluang.co - Remote - Internship",
+    "details": [
+      "Developed responsive, accessible web applications using Next.js, TypeScript, and modern UI libraries",
+      "Translated complex Figma UI/UX designs into modular, reusable React components"
+    ]
+  },
+  {
+    "role": "Front End Developer Facilitator",
+    "period": "July 2024 – September 2024",
+    "company": "Dicoding - Remote - Freelance",
+    "details": [
+      "Mentored 18 educators in modern JavaScript, web standards, and frontend development",
+      "Conducted technical code reviews and hands-on workshops to accelerate learning"
+    ]
+  }
+]

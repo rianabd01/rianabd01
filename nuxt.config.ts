@@ -3,6 +3,9 @@ export default defineNuxtConfig({
 	compatibilityDate: "2025-07-15",
 	devtools: { enabled: true },
 	modules: ["@nuxtjs/tailwindcss"],
+	runtimeConfig: {
+		githubApiToken: process.env.GITHUB_API_TOKEN || "",
+	},
 	components: [
 		{
 			path: "~/components",
@@ -38,7 +41,10 @@ export default defineNuxtConfig({
 						"Portfolio of a Full Stack Developer showcasing skills, experience, projects, and blog.",
 				},
 			],
-			link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+			link: [
+				{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+				{ rel: "alternate icon", type: "image/x-icon", href: "/favicon.ico" },
+			],
 		},
 	},
 	css: ["./app/assets/css/main.css"],

@@ -2,7 +2,7 @@
 
 My name is **Rian**.<br>
 I'm a **Software Engineer** ;}<br>
-See my page on [rianspace](https://rianspace.netlify.app/)
+See my page on [rianspace](https://rianabd.art/)
 
 
 If you're interested to connect with me, please send email to [rianwahyuabd@gmail.com](mailto:rianwahyuabd@gmail.com) or visit my [Linkedin](https://www.linkedin.com/in/rianwahyuab/).

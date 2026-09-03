@@ -1,3 +1,10 @@
+const calculateReadingTime = (textOrHtml: string): number => {
+  if (!textOrHtml) return 1
+  const cleanText = textOrHtml.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+  const wordCount = cleanText ? cleanText.split(' ').length : 0
+  return Math.max(1, Math.ceil(wordCount / 200))
+}
+
 export default defineEventHandler(async (event) => {
   const { id } = getQuery(event)
   
@@ -39,15 +46,17 @@ export default defineEventHandler(async (event) => {
       })
       
       if (matchedPost) {
+        const content = matchedPost['content:encoded'] || matchedPost.content || ''
         return {
           success: true,
           post: {
             title: matchedPost.title || '',
             link: matchedPost.link || '',
             pubDate: matchedPost.pubDate || '',
-            content: matchedPost['content:encoded'] || matchedPost.content || '',
+            content,
             categories: matchedPost.categories || [],
-            creator: matchedPost.creator || ''
+            creator: matchedPost.creator || '',
+            readingTime: calculateReadingTime(content)
           }
         }
       }
@@ -58,15 +67,17 @@ export default defineEventHandler(async (event) => {
       }
     }
     
+    const content = post['content:encoded'] || post.content || ''
     return {
       success: true,
       post: {
         title: post.title || '',
         link: post.link || '',
         pubDate: post.pubDate || '',
-        content: post['content:encoded'] || post.content || '',
+        content,
         categories: post.categories || [],
-        creator: post.creator || ''
+        creator: post.creator || '',
+        readingTime: calculateReadingTime(content)
       }
     }
   } catch (error) {

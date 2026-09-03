@@ -16,10 +16,18 @@
     <article v-else-if="post" class="claude-card p-6">
       <header class="mb-8">
         <h1 class="font-bold mb-4">{{ post.title }}</h1>
-        <div class="flex flex-wrap items-center gap-4 text-sm text-muted-foreground font-sans">
+        <div class="flex flex-wrap items-center gap-3 text-sm text-muted-foreground font-sans">
           <span>{{ formatDate(post.pubDate) }}</span>
-          <span>•</span>
-          <span>{{ post.categories?.join(', ') }}</span>
+          <span v-if="post.readingTime">•</span>
+          <span v-if="post.readingTime" class="flex items-center gap-1">
+            <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-none stroke-current" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            {{ post.readingTime }} min read
+          </span>
+          <span v-if="post.categories && post.categories.length">•</span>
+          <span v-if="post.categories && post.categories.length">{{ post.categories.join(', ') }}</span>
         </div>
       </header>
       <div class="prose max-w-none" v-html="post.content" />

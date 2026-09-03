@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Frontend",
+    "items": ["Vue", "React", "TypeScript"]
+  },
+  {
+    "title": "Backend",
+    "items": ["Golang", "Python", "Node.js"]
+  },
+  {
+    "title": "Database",
+    "items": ["MongoDB", "PostgreSQL", "MySQL"]
+  },
+  {
+    "title": "Others",
+    "items": ["Docker", "K8s", "RabbitMQ", "LangChain", "OIDC"]
+  }
+]

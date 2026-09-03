@@ -7,6 +7,7 @@ export interface GitHubProject {
   homepage: string
   stargazers_count: number
   language: string
+  updated_at?: string
 }
 
 export interface GitHubApiResponse {
@@ -26,6 +27,7 @@ export interface BlogPost {
   categories: string[]
   creator: string
   id?: string
+  readingTime?: number
 }
 
 export interface BlogPostsApiResponse {
@@ -38,4 +40,37 @@ export interface BlogPostApiResponse {
   success: boolean
   post?: BlogPost
   error?: string
+}
+
+export interface SkillCategory {
+  title: string
+  items: string | string[]
+}
+
+export interface CtaLink {
+  text: string
+  link: string
+}
+
+export interface SocialLink {
+  name: string
+  url: string
+  icon?: string
+}
+
+export interface HeroData {
+  greeting: string
+  name: string
+  role: string
+  description: string
+  socials?: SocialLink[]
+  primaryCta?: CtaLink
+  secondaryCta?: CtaLink
+}
+
+export interface TimelineItemData {
+  role: string
+  period: string
+  company: string
+  details: string[]
 }
